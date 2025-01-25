@@ -3,6 +3,15 @@
 @tailwind utilities;
 
 :root {
+  --font-geist-sans: sans-serif;
+  --font-geist-mono: monospace;
+}
+
+body {
+  font-family: var(--font-geist-sans), sans-serif;
+}
+
+:root {
   --background: #ffffff;
   --foreground: #171717;
 }
