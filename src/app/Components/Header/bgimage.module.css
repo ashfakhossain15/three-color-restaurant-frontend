@@ -1,0 +1,10 @@
+.bgImageSpan {
+    display: inline-block;
+    width: 100% !important;
+    height: fit-content;
+    background-image: url("/logo_trecolori.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  

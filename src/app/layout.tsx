@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { JSX } from "react/jsx-runtime";
 
 // Import and configure the font
 const interFont = Inter({
