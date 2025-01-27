@@ -18,7 +18,7 @@ const Header = () => {
 
   return (
     <div>
-      <header className="flex justify-between items-center bg-white/30 backdrop-blur-none px-6 md:px-12 py-4 md:py-6 shadow-lg">
+      <header className=" flex md:flex-row justify-between items-center bg-white/30 backdrop-blur-none px-6 md:px-12 py-4 md:py-6 ">
         <Link href="/">
           <Image
             src="/logo_trecolori.png"
@@ -43,37 +43,39 @@ const Header = () => {
             <Link href="">About Us</Link>
           </button>
         </nav>
+
         <div>
-          <div className="md:hidden flex items-center">
+          <div className="md:hidden flex items-center justify-center mx-auto">
             <button
               type="button"
               onClick={(): void => toggleMenuBar()}
               className="text-blue-500"
             >
-              {menuBar ? "=" : "+"} </button>
+              {menuBar ? "=" : "+"}{" "}
+            </button>
           </div>
-          {menuBar ? (
-            <div className="md:hidden ">
-              <nav className="flex flex-col space-y-2 p-4 text-base font-semibold">
-                <button className="hover:text-blue-500 transition duration-150">
-                  <Link href="/">Dashboard</Link>
-                </button>
-                <button className="hover:text-blue-500 transition duration-150">
-                  <Link href="">Menu</Link>
-                </button>
-                <button className="hover:text-blue-500 transition duration-150">
-                  <Link href="">Order Online</Link>
-                </button>
-                <button className="hover:text-blue-500 transition duration-150">
-                  <Link href="">About Us</Link>
-                </button>
-              </nav>
-            </div>
-          ) : (
-            ""
-          )}
         </div>
       </header>
+      {menuBar ? (
+        <div className="md:hidden">
+          <nav className="flex flex-col space-y-2 p-4 text-base font-semibold">
+            <button className="hover:text-blue-500 transition duration-150">
+              <Link href="/">Dashboard</Link>
+            </button>
+            <button className="hover:text-blue-500 transition duration-150">
+              <Link href="">Menu</Link>
+            </button>
+            <button className="hover:text-blue-500 transition duration-150">
+              <Link href="">Order Online</Link>
+            </button>
+            <button className="hover:text-blue-500 transition duration-150">
+              <Link href="">About Us</Link>
+            </button>
+          </nav>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
