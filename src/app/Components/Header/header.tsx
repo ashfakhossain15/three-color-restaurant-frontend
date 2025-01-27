@@ -6,19 +6,10 @@ import { useState } from "react";
 const Header = () => {
   const [menuBar, setMenuBar] = useState(false);
   const toggleMenuBar = () => setMenuBar(!menuBar);
-  //   const [isImageVisible, setIsImageVisible] = useState(false);
-
-  //   useEffect(() => {
-  //     const timer = setTimeout(() => {
-  //       setIsImageVisible(true);
-  //     }, 1000);
-
-  //     return () => clearTimeout(timer);
-  //   }, []);
 
   return (
     <div>
-      <header className=" flex md:flex-row justify-between items-center bg-white/30 backdrop-blur-none px-6 md:px-12 py-4 md:py-6 ">
+      <header className="flex md:flex-row justify-between items-center bg-white/30 backdrop-blur-none px-6 md:px-12 py-4 md:py-6">
         <Link href="/">
           <Image
             src="/logo_trecolori.png"
@@ -48,34 +39,36 @@ const Header = () => {
           <div className="md:hidden flex items-center justify-center mx-auto">
             <button
               type="button"
-              onClick={(): void => toggleMenuBar()}
+              onClick={toggleMenuBar}
               className="text-blue-500"
             >
-              {menuBar ? "=" : "+"}{" "}
+              {menuBar ? "=" : "+"}
             </button>
           </div>
         </div>
       </header>
-      {menuBar ? (
-        <div className="md:hidden">
-          <nav className="flex flex-col space-y-2 p-4 text-base font-semibold">
-            <button className="hover:text-blue-500 transition duration-150">
-              <Link href="/">Dashboard</Link>
-            </button>
-            <button className="hover:text-blue-500 transition duration-150">
-              <Link href="">Menu</Link>
-            </button>
-            <button className="hover:text-blue-500 transition duration-150">
-              <Link href="">Order Online</Link>
-            </button>
-            <button className="hover:text-blue-500 transition duration-150">
-              <Link href="">About Us</Link>
-            </button>
-          </nav>
-        </div>
-      ) : (
-        ""
-      )}
+
+      {/* Menu Bar */}
+      <div
+        className={`md:hidden transform transition-all duration-300 ease-in-out ${
+          menuBar ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
+        } bg-white absolute top-20 left-0 w-full shadow-lg z-50`}
+      >
+        <nav className="flex flex-col space-y-2 p-4 text-base font-semibold">
+          <button className="hover:text-blue-500 transition duration-150">
+            <Link href="/">Dashboard</Link>
+          </button>
+          <button className="hover:text-blue-500 transition duration-150">
+            <Link href="">Menu</Link>
+          </button>
+          <button className="hover:text-blue-500 transition duration-150">
+            <Link href="">Order Online</Link>
+          </button>
+          <button className="hover:text-blue-500 transition duration-150">
+            <Link href="">About Us</Link>
+          </button>
+        </nav>
+      </div>
     </div>
   );
 };
