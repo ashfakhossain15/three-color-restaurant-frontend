@@ -1,23 +1,35 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Header = () => {
   const [menuBar, setMenuBar] = useState(false);
+  const [logoClass, setLogoClass] = useState("initial");
+
   const toggleMenuBar = () => setMenuBar(!menuBar);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLogoClass("animate");
+    }, 600); // Delay to allow initial load animation
+  }, []);
 
   return (
     <div>
-      <header className="flex md:flex-row justify-between items-center bg-white/30 backdrop-blur-none px-6 md:px-12 py-4 md:py-6">
+      <header className="flex justify-between items-center bg-white/30 backdrop-blur-none px-6 md:px-20 py-4 md:py-6 shadow z-40">
         <Link href="/">
-          <Image
-            src="/logo_trecolori.png"
-            width={60}
-            height={60}
-            alt="Logo"
-            className="w-12 h-12 md:w-16 md:h-16"
-          />
+          <div
+            className={`logo-container transition-transform duration-700 ease-in-out ${logoClass}`}
+          >
+            <Image
+              src="/logo_trecolori.png"
+              width={90}
+              height={90}
+              alt="Logo"
+              className="w-14 h-14 md:w-20 md:h-20"
+            />
+          </div>
         </Link>
 
         <nav className="hidden md:flex justify-center space-x-4 md:space-x-8 text-base md:text-lg font-semibold">
@@ -35,16 +47,14 @@ const Header = () => {
           </button>
         </nav>
 
-        <div>
-          <div className="md:hidden flex items-center justify-center mx-auto">
-            <button
-              type="button"
-              onClick={toggleMenuBar}
-              className="text-blue-500"
-            >
-              {menuBar ? "=" : "+"}
-            </button>
-          </div>
+        <div className="md:hidden flex items-center ">
+          <button
+            type="button"
+            onClick={toggleMenuBar}
+            className="text-blue-500"
+          >
+            {menuBar ? "=" : "+"}
+          </button>
         </div>
       </header>
 
