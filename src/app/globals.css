@@ -23,11 +23,11 @@ body {
 }
 
 .logo-container.initial {
-  transform: translateX(-100vw); /* Start off-screen and rotate */
+  transform: translateX(-100vw);
 }
 
 .logo-container.animate {
-  transform: translateX(10px); /* Slight overshoot */
+  /* Slight overshoot */
   animation: settle 1.1s ease-in-out forwards; /* Settle into place */
 }
 
@@ -44,10 +44,10 @@ body {
     opacity: 1;
     transform: translateX(0px) rotate(0deg);
   } */
-  80% {
+  /* 80% {
     opacity: 100;
     transform: translateX(30px) rotate(30deg);
-  }
+  } */
   100% {
     opacity: 100;
     transform: translateX(0) rotate(0deg);

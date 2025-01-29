@@ -20,7 +20,7 @@ const Header = () => {
       <header className="flex justify-between items-center bg-white/30 backdrop-blur-none px-6 md:px-20 py-4 md:py-6 shadow z-40">
         <Link href="/">
           <div
-            className={`logo-container transition-transform duration-700 ease-in-out ${logoClass}`}
+            className={`logo-container transition-transform ${logoClass}`}
           >
             <Image
               src="/logo_trecolori.png"
