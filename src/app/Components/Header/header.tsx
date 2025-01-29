@@ -12,19 +12,19 @@ const Header = () => {
   useEffect(() => {
     setTimeout(() => {
       setLogoClass("animates");
-    }, 600); // Delay to allow initial load animation
+    }, 600);
   }, []);
 
   return (
     <div>
       <header className="flex justify-between items-center bg-white/30 backdrop-blur-none px-6 md:px-20 py-4 md:py-6 shadow z-40">
         <Link href="/">
-          <div className={`logo-container transition ${logoClass}`}>
+          <div className={`logo-container ${logoClass}`}>
             <Image
               src="/logo_trecolori.png"
               width={90}
               height={90}
-              alt="Logo"
+              alt=""
               className="w-14 h-14 md:w-20 md:h-20"
             />
           </div>
