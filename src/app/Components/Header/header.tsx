@@ -11,7 +11,7 @@ const Header = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setLogoClass("animate");
+      setLogoClass("animates");
     }, 600); // Delay to allow initial load animation
   }, []);
 
