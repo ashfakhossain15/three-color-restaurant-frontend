@@ -16,7 +16,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div>
+    <div className="">
       <header className="flex justify-between items-center bg-white/30 backdrop-blur-none px-6 md:px-20 py-4 md:py-6 shadow z-40">
         <Link href="/">
           <div className={`logo-container ${logoClass}`}>
@@ -60,7 +60,7 @@ const Header = () => {
       <div
         className={`md:hidden transform transition-all duration-300 ease-in-out ${
           menuBar ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
-        } bg-white absolute top-20 left-0 w-full shadow-lg z-50`}
+        } bg-white/30 absolute top-20 left-0 w-full shadow-lg z-50`}
       >
         <nav className="flex flex-col space-y-2 p-4 text-base font-semibold">
           <button className="hover:text-blue-500 transition duration-150">

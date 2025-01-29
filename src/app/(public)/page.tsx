@@ -1,12 +1,15 @@
 "use client";
 import React from "react";
 import Header from "../Components/Header/header";
+import Main from "./Main/main";
 
 export default function Home() {
   return (
     <div>
-      <Header />
-      Home
+      <div className="absolute top-0 w-full">
+        <Header />
+      </div>
+      <Main />
     </div>
   );
 }
