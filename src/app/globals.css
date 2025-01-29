@@ -28,7 +28,7 @@ body {
 
 .logo-container.animate {
   /* Slight overshoot */
-  animation: settle 1.1s ease-in-out forwards; /* Settle into place */
+  animation: settle 1.1s forwards; /* Settle into place */
 }
 
 @keyframes settle {
