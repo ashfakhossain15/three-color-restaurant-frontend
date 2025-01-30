@@ -2,6 +2,7 @@
 import React from "react";
 import Header from "../Components/Header/header";
 import Main from "./Main/main";
+import Footer from "../Components/Footer/Footer";
 
 export default function Home() {
   return (
@@ -10,6 +11,9 @@ export default function Home() {
         <Header />
       </div>
       <Main />
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 }
