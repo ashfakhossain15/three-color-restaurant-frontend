@@ -2,7 +2,7 @@
 
 const Main = () => {
   return (
-    <div className="relative h-screen sm:bg-[550px] mb:bg-contain lg:bg-cover  bg-center bg-fixed bg-[url('/trecolori-limhamn.jpg')]">
+    <div className="relative h-screen bg-cover  bg-center bg-no-repeat bg-fixed bg-[url('/trecolori-limhamn.jpg')] w-full">
       <span className="absolute inset-0 bg-black bg-opacity-50"></span>
 
       <div className="relative flex items-center justify-center h-full text-white text-2xl">
