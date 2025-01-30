@@ -16,14 +16,14 @@ export default function Footer() {
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className=" w-full grid sm:grid-cols-1 lg:flex  justify-center items-center gap-10"
+        className=" w-full grid sm:grid-cols-1  lg:flex  justify-center items-center gap-x-16"
       >
         {/* Left Section - Logo */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ delay: 0.3, duration: 0.5 }}
-          className="flex flex-col items-center md:items-center text-center"
+          className="  flex flex-col items-center md:items-center text-center"
         >
           <motion.img
             src="/logo_trecolori.png"
@@ -37,7 +37,7 @@ export default function Footer() {
         </motion.div>
 
         {/* Middle Section - Info Columns */}
-        <div className="flex  gap-6 text-center md:text-left">
+        <div className=" grid sm:grid-cols-1 md:grid-cols-2 lg:flex gap-10 text-center md:text-left mx-10 my-4">
           {/* Opening Hours */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -91,6 +91,17 @@ export default function Footer() {
         </div>
 
         {/* Right Section - Social Links */}
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+        transition={{ delay: 0.8, duration: 0.4 }}
+        className="flex items-center justify-center text-center"
+      >
+        <p className="text-center text-xs mt-4">
+          <span className="text-blue-500">&copy; </span>2025 Trecolori. All
+          Rights Reserved.
+        </p>
       </motion.div>
     </footer>
   );
