@@ -2,7 +2,7 @@
 
 import { useInView, motion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import {  useRef } from "react";
 
 const Main = () => {
   const ref = useRef(null);
