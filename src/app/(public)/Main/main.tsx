@@ -15,7 +15,7 @@ const Main = () => {
   return (
     <div
       ref={ref}
-      className="relative sm:h-[130vh] md:h-screen lg:h-screen bg-cover  bg-center bg-no-repeat bg-fixed bg-[url('/trecolori-limhamn.jpg')] w-full"
+      className="relative h-screen bg-cover  bg-center bg-no-repeat bg-fixed bg-[url('/trecolori-limhamn.jpg')] w-full"
     >
       <span className="absolute inset-0 bg-black bg-opacity-50 "></span>
 
