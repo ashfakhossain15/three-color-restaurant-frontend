@@ -7,8 +7,10 @@ import Footer from "../Components/Footer/Footer";
 export default function Home() {
   return (
     <div>
-      <div className="absolute top-0 w-full z-50">
-        <Header />
+      <div>
+        <div className="absolute top-0 w-full z-50">
+          <Header />
+        </div>
       </div>
       <Main />
       <div>

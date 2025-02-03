@@ -18,7 +18,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="">
+    <div className="absolute top-0 w-full z-50">
       <header className="flex justify-between items-center bg-black/30 backdrop-blur-none px-6 md:px-20 py-4 md:py-6 shadow z-40">
         <Link href="/">
           <div className={`logo-container ${logoClass}`}>

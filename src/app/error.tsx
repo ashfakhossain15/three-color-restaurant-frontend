@@ -1,4 +1,4 @@
-// pages/404.tsx
+"use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -25,15 +25,6 @@ export default function ErrorPage() {
         <p className="mt-2 text-gray-500">
           Maybe you&apos;re lost? Let’s get you back to our delicious menu.
         </p>
-
-        <motion.img
-          src="/images/restaurant-error.svg"
-          alt="Error Illustration"
-          className="w-60 mx-auto my-6"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        />
 
         <Link href="/">
           <motion.button

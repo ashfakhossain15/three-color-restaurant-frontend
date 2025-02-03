@@ -41,8 +41,12 @@ const Main = () => {
             Discover our vibrant and sustainable culinary offerings
           </p>
         </motion.div>
-        <motion.div>
-          <button className="mt-4 px-8 py-2 text-white bg-yellow-500 hover:bg-yellow-400 transition duration-150">
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+        >
+          <button className="mt-4 px-8 py-2 rounded-tl-3xl rounded-br-3xl text-white bg-yellow-500 hover:bg-yellow-400 transition duration-150">
             Learn More
           </button>
         </motion.div>
