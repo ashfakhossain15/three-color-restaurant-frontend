@@ -83,25 +83,51 @@ const Header = () => {
         </div>
       </header>
 
-      <div
-        className={`md:hidden transform transition-all duration-300 ease-in-out ${
-          menuBar ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
-        } bg-black/30 absolute top-20 left-0 w-full shadow-lg z-50`}
-      >
-        <nav className="flex flex-col space-y-2 p-4 text-base font-semibold">
-          {["Dashboard", "Menu", "Order Online", "About Us"].map(
-            (item, index) => (
-              <Link
-                key={index}
-                href="/"
-                className="text-yellow-100 hover:text-yellow-500 transition duration-150"
-              >
-                {item}
-              </Link>
-            )
-          )}
-        </nav>
-      </div>
+      {isSticky ? (
+        <div
+          className={`md:hidden transform transition-all duration-300 ease-in-out ${
+            menuBar
+              ? "translate-x-0 opacity-100"
+              : "-translate-x-full opacity-0"
+          } bg-black/30 absolute top-12 left-0 w-full shadow-lg z-50`}
+        >
+          <nav className="flex flex-col justify-center items-center w-full space-y-2 p-4 text-base font-semibold">
+            {["Dashboard", "Menu", "Order Online", "About Us"].map(
+              (item, index) => (
+                <Link
+                  key={index}
+                  href="/"
+                  className="text-yellow-100 hover:text-yellow-500 transition duration-150"
+                >
+                  {item}
+                </Link>
+              )
+            )}
+          </nav>
+        </div>
+      ) : (
+        <div
+          className={`md:hidden transform transition-all duration-300 ease-in-out ${
+            menuBar
+              ? "translate-x-0 opacity-100"
+              : "-translate-x-full opacity-0"
+          } bg-black/30 absolute top-20 left-0 w-full shadow-lg z-50`}
+        >
+          <nav className="flex flex-col justify-center items-center space-y-2 p-4 font-semibold w-full">
+            {["Dashboard", "Menu", "Order Online", "About Us"].map(
+              (item, index) => (
+                <Link
+                  key={index}
+                  href="/"
+                  className="text-yellow-100 hover:text-yellow-500 transition duration-150"
+                >
+                  {item}
+                </Link>
+              )
+            )}
+          </nav>
+        </div>
+      )}
     </div>
   );
 };
