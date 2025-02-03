@@ -6,6 +6,12 @@ import { useState, useEffect } from "react";
 import { FaAlignRight, FaTimes } from "react-icons/fa";
 
 const Header = () => {
+  const navberLinks = [
+    { title: "Dashboard", href: "/" },
+    { title: "About Us", href: "/about-us" },
+    { title: "Menu", href: "/menu" },
+    { title: "Contact", href: "/contact" },
+  ];
   const [menuBar, setMenuBar] = useState(false);
   const [logoClass, setLogoClass] = useState("initial");
   const [isSticky, setIsSticky] = useState(false);
@@ -36,7 +42,7 @@ const Header = () => {
       className={`w-full z-50 transition-all duration-400 ${
         isSticky
           ? "fixed top-0 bg-black/60 backdrop-blur-md py-2 shadow-md"
-          : "absolute bg-black/30 backdrop-blur-none py-4 md:py-6"
+          : "absolute bg-black/30 backdrop-blur-[3px] py-4 md:py-6"
       }`}
     >
       <header className="flex justify-between items-center px-6 md:px-20 transition-all duration-300">
@@ -57,17 +63,15 @@ const Header = () => {
         </Link>
 
         <nav className="hidden md:flex justify-center space-x-4 md:space-x-8 text-base md:text-lg font-semibold">
-          {["Dashboard", "Menu", "Order Online", "About Us"].map(
-            (item, index) => (
-              <Link
-                key={index}
-                href="/"
-                className="text-yellow-100 hover:text-yellow-500 transition duration-150"
-              >
-                {item}
-              </Link>
-            )
-          )}
+          {navberLinks.map((item, index) => (
+            <Link
+              key={index}
+              href={item.href}
+              className="text-yellow-100 hover:text-yellow-500 transition duration-150"
+            >
+              {item.title}
+            </Link>
+          ))}
         </nav>
 
         <div className="md:hidden flex items-center">
@@ -92,17 +96,16 @@ const Header = () => {
           } bg-black/30 absolute top-12 left-0 w-full shadow-lg z-50`}
         >
           <nav className="flex flex-col justify-center items-center w-full space-y-2 p-4 text-base font-semibold">
-            {["Dashboard", "Menu", "Order Online", "About Us"].map(
-              (item, index) => (
-                <Link
-                  key={index}
-                  href="/"
-                  className="text-yellow-100 hover:text-yellow-500 transition duration-150"
-                >
-                  {item}
-                </Link>
-              )
-            )}
+            {navberLinks.map((item, index) => (
+              <Link
+                key={index}
+                onClick={toggleMenuBar}
+                href={item.href}
+                className="text-yellow-100 hover:text-yellow-500 transition duration-150"
+              >
+                {item.title}
+              </Link>
+            ))}
           </nav>
         </div>
       ) : (
@@ -114,17 +117,16 @@ const Header = () => {
           } bg-black/30 absolute top-20 left-0 w-full shadow-lg z-50`}
         >
           <nav className="flex flex-col justify-center items-center space-y-2 p-4 font-semibold w-full">
-            {["Dashboard", "Menu", "Order Online", "About Us"].map(
-              (item, index) => (
-                <Link
-                  key={index}
-                  href="/"
-                  className="text-yellow-100 hover:text-yellow-500 transition duration-150"
-                >
-                  {item}
-                </Link>
-              )
-            )}
+            {navberLinks.map((item, index) => (
+              <Link
+                key={index}
+                onClick={toggleMenuBar}
+                href={item.href}
+                className="text-yellow-100 hover:text-yellow-500 transition duration-150"
+              >
+                {item.title}
+              </Link>
+            ))}
           </nav>
         </div>
       )}
