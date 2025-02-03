@@ -8,6 +8,7 @@ import { FaAlignRight, FaTimes } from "react-icons/fa";
 const Header = () => {
   const [menuBar, setMenuBar] = useState(false);
   const [logoClass, setLogoClass] = useState("initial");
+  const [isSticky, setIsSticky] = useState(false);
 
   const toggleMenuBar = () => setMenuBar(!menuBar);
 
@@ -17,9 +18,28 @@ const Header = () => {
     }, 600);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 5) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="absolute top-0 w-full z-50">
-      <header className="flex justify-between items-center bg-black/30 backdrop-blur-none px-6 md:px-20 py-4 md:py-6 shadow z-40">
+    <div
+      className={`w-full z-50 transition-all duration-400 ${
+        isSticky
+          ? "fixed top-0 bg-black/60 backdrop-blur-md py-2 shadow-md"
+          : "absolute bg-black/30 backdrop-blur-none py-4 md:py-6"
+      }`}
+    >
+      <header className="flex justify-between items-center px-6 md:px-20 transition-all duration-300">
         <Link href="/">
           <div className={`logo-container ${logoClass}`}>
             <Image
@@ -27,27 +47,30 @@ const Header = () => {
               width={90}
               height={90}
               alt=""
-              className="w-14 h-14 md:w-20 md:h-20"
+              className={`transition-all duration-300 ${
+                isSticky
+                  ? "w-12 h-12 md:w-16 md:h-16"
+                  : "w-14 h-14 md:w-20 md:h-20"
+              }`}
             />
           </div>
         </Link>
 
         <nav className="hidden md:flex justify-center space-x-4 md:space-x-8 text-base md:text-lg font-semibold">
-          <button className="text-yellow-100 hover:text-yellow-500 transition duration-150">
-            <Link href="/">Dashboard</Link>
-          </button>
-          <button className="text-yellow-100 hover:text-yellow-500 transition duration-150">
-            <Link href="">Menu</Link>
-          </button>
-          <button className="text-yellow-100 hover:text-yellow-500 transition duration-150">
-            <Link href="">Order Online</Link>
-          </button>
-          <button className="text-yellow-100 hover:text-yellow-500 transition duration-150">
-            <Link href="">About Us</Link>
-          </button>
+          {["Dashboard", "Menu", "Order Online", "About Us"].map(
+            (item, index) => (
+              <Link
+                key={index}
+                href="/"
+                className="text-yellow-100 hover:text-yellow-500 transition duration-150"
+              >
+                {item}
+              </Link>
+            )
+          )}
         </nav>
 
-        <div className="md:hidden flex items-center ">
+        <div className="md:hidden flex items-center">
           <motion.button
             type="button"
             onClick={toggleMenuBar}
@@ -60,25 +83,23 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Menu Bar */}
       <div
         className={`md:hidden transform transition-all duration-300 ease-in-out ${
           menuBar ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
         } bg-black/30 absolute top-20 left-0 w-full shadow-lg z-50`}
       >
         <nav className="flex flex-col space-y-2 p-4 text-base font-semibold">
-          <button className="text-yellow-100 hover:text-yellow-500 transition duration-150">
-            <Link href="/">Dashboard</Link>
-          </button>
-          <button className="text-yellow-100 hover:text-yellow-500 transition duration-150">
-            <Link href="">Menu</Link>
-          </button>
-          <button className="text-yellow-100 hover:text-yellow-500 transition duration-150">
-            <Link href="">Order Online</Link>
-          </button>
-          <button className="text-yellow-100 hover:text-yellow-500 transition duration-150">
-            <Link href="">About Us</Link>
-          </button>
+          {["Dashboard", "Menu", "Order Online", "About Us"].map(
+            (item, index) => (
+              <Link
+                key={index}
+                href="/"
+                className="text-yellow-100 hover:text-yellow-500 transition duration-150"
+              >
+                {item}
+              </Link>
+            )
+          )}
         </nav>
       </div>
     </div>

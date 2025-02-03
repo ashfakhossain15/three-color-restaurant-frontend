@@ -8,9 +8,7 @@ export default function Home() {
   return (
     <div>
       <div>
-        <div className="absolute top-0 w-full z-50">
-          <Header />
-        </div>
+        <Header />
       </div>
       <Main />
       <div>
