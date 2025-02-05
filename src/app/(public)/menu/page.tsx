@@ -4,7 +4,7 @@ import Header from "@/app/Components/Header/header";
 const Menu = () => (
   <div className="max-h-full">
     <Header />
-    <h1></h1>
+    <h1>Menu</h1>
     <Footer />
   </div>
 );
