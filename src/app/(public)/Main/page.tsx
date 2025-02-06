@@ -3,6 +3,7 @@
 import { useInView, motion } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
+import CustomerReview from "./customer-review/customer-review";
 
 const Main = () => {
   const ref = useRef(null);
@@ -50,6 +51,9 @@ const Main = () => {
             Order Now
           </button>
         </motion.div>
+        <section className="w-full">
+          <CustomerReview />
+        </section>
       </div>
     </div>
   );
