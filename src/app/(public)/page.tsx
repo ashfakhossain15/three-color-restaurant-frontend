@@ -10,7 +10,10 @@ export default function Home() {
       <div>
         <Header />
       </div>
-      <Main />
+      <section className="relative h-full  bg-cover  bg-center bg-no-repeat bg-fixed bg-[url('/trecolori-limhamn.jpg')] w-full">
+        <span className="absolute inset-0 bg-black bg-opacity-50 "></span>
+        <Main />
+      </section>
 
       <div>
         <Footer />

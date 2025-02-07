@@ -14,12 +14,7 @@ const Main = () => {
   //   }, 500);
   // }, []);
   return (
-    <div
-      ref={ref}
-      className="relative h-screen bg-cover  bg-center bg-no-repeat bg-fixed bg-[url('/trecolori-limhamn.jpg')] w-full"
-    >
-      <span className="absolute inset-0 bg-black bg-opacity-50 "></span>
-
+    <div ref={ref} className="py-32 md:pt-40 pb-24">
       <div className="relative flex flex-col items-center justify-center h-full text-white gap-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
