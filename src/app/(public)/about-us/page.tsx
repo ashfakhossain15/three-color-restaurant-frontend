@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+import { delay, motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect } from "react";
 
@@ -50,9 +50,16 @@ const fadeInUp = {
 };
 
 const stagger = {
+  hidden: { opacity: 0 },
   visible: {
+    opacity: 1,
+
     transition: {
+      type: "stagger",
+      duration: 0.5,
+      ease: "easeInOut",
       staggerChildren: 0.4,
+      delayChildren: 1,
     },
   },
 };
