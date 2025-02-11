@@ -1,9 +1,10 @@
 "use client";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { FaAlignRight, FaTimes } from "react-icons/fa";
+import { usePathname } from "next/navigation"; // Import usePathname
 
 const Header = () => {
   const navberLinks = [
@@ -15,6 +16,7 @@ const Header = () => {
   const [menuBar, setMenuBar] = useState(false);
   const [logoClass, setLogoClass] = useState("initial");
   const [isSticky, setIsSticky] = useState(false);
+  const pathname = usePathname(); // Get the current path
 
   const toggleMenuBar = () => setMenuBar(!menuBar);
 
@@ -62,18 +64,24 @@ const Header = () => {
           </div>
         </Link>
 
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex justify-center space-x-4 md:space-x-8 text-base md:text-lg font-semibold">
           {navberLinks.map((item, index) => (
             <Link
               key={index}
               href={item.href}
-              className="text-yellow-100 hover:text-yellow-500 transition duration-150"
+              className={`transition duration-150 ${
+                pathname === item.href
+                  ? "text-yellow-500" // Active link color
+                  : "text-yellow-100 hover:text-yellow-500" // Inactive link color
+              }`}
             >
               {item.title}
             </Link>
           ))}
         </nav>
 
+        {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center">
           <motion.button
             type="button"
@@ -87,49 +95,37 @@ const Header = () => {
         </div>
       </header>
 
-      {isSticky ? (
-        <div
-          className={`md:hidden transform transition-all duration-300 ease-in-out ${
-            menuBar
-              ? "translate-x-0 opacity-100"
-              : "-translate-x-full opacity-0"
-          } bg-black/30 absolute top-12 left-0 w-full shadow-lg z-50`}
-        >
-          <nav className="flex flex-col justify-center items-center w-full space-y-2 p-4 text-base font-semibold">
-            {navberLinks.map((item, index) => (
-              <Link
-                key={index}
-                onClick={toggleMenuBar}
-                href={item.href}
-                className="text-yellow-100 hover:text-yellow-500 transition duration-150"
-              >
-                {item.title}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      ) : (
-        <div
-          className={`md:hidden transform transition-all duration-300 ease-in-out ${
-            menuBar
-              ? "translate-x-0 opacity-100"
-              : "-translate-x-full opacity-0"
-          } bg-black/30 absolute top-20 left-0 w-full shadow-lg z-50`}
-        >
-          <nav className="flex flex-col justify-center items-center space-y-2 p-4 font-semibold w-full">
-            {navberLinks.map((item, index) => (
-              <Link
-                key={index}
-                onClick={toggleMenuBar}
-                href={item.href}
-                className="text-yellow-100 hover:text-yellow-500 transition duration-150"
-              >
-                {item.title}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      )}
+      {/* Mobile Navigation */}
+      <AnimatePresence>
+        {menuBar && (
+          <motion.div
+            initial={{ opacity: 0, x: "-100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "-100%" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className={`md:hidden bg-black/30 absolute ${
+              isSticky ? "top-12" : "top-20"
+            } left-0 w-full shadow-lg z-50`}
+          >
+            <nav className="flex flex-col justify-center items-center w-full space-y-2 p-4 text-base font-semibold">
+              {navberLinks.map((item, index) => (
+                <Link
+                  key={index}
+                  onClick={toggleMenuBar}
+                  href={item.href}
+                  className={`transition duration-150 ${
+                    pathname === item.href
+                      ? "text-yellow-500" // Active link color
+                      : "text-yellow-100 hover:text-yellow-500" // Inactive link color
+                  }`}
+                >
+                  {item.title}
+                </Link>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
