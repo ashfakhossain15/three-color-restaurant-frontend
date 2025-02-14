@@ -11,8 +11,7 @@ export default function Footer() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <footer ref={ref} className="bg-yellow-200 w-full py-10 px-6 md:px-12">
-      <motion.div
+    <footer ref={ref} className="bg-yellow-200 w-full py-10 px-6 md:px-12"> <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, ease: "easeOut" }}
