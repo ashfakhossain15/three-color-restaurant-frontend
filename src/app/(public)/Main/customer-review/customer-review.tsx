@@ -64,7 +64,7 @@ const CustomerReviewCarousel = () => {
       </h2>
       <Carousel
         className="w-full max-w-md"
-        setApi={(instance: EmblaCarouselType | null) => setApi(instance)}
+        setApi={(instance: any | null) => setApi(instance)}
       >
         <CarouselContent>
           {reviews.map((review) => (
