@@ -1,15 +1,15 @@
 "use client";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { EmblaCarouselType } from "embla-carousel"; // Ensure correct type import
 import { Button } from "@/components/ui/button";
 import {
+  Carousel,
   CarouselContent,
+  CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  CarouselApi, // Import the correct type from the carousel component
 } from "@/components/ui/carousel";
-import { Carousel } from "@/components/ui/carousel";
-import { CarouselItem } from "@/components/ui/carousel";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const reviews = [
   {
@@ -30,23 +30,25 @@ const reviews = [
 ];
 
 const CustomerReviewCarousel = () => {
-  const [api, setApi] = useState<EmblaCarouselType | null>(null);
+  const [api, setApi] = useState<CarouselApi | null>(null);
   const [current, setCurrent] = useState(0);
 
-  // Ensure we only set the API on the client-side
   useEffect(() => {
-    if (typeof window !== "undefined" && api) {
-      const interval = setInterval(() => {
-        api.scrollNext();
-      }, 3000);
+    if (!api) return;
 
-      return () => clearInterval(interval);
-    }
+    // Auto-swiping logic
+    const interval = setInterval(() => {
+      api.scrollNext();
+    }, 3000); // Change slide every 3 seconds
+
+    // Cleanup interval on unmount
+    return () => clearInterval(interval);
   }, [api]);
 
   useEffect(() => {
     if (!api) return;
 
+    // Update current slide index
     api.on("select", () => {
       setCurrent(api.selectedScrollSnap());
     });
@@ -62,10 +64,7 @@ const CustomerReviewCarousel = () => {
       <h2 className="text-4xl font-bold text-center mb-4 text-yellow-200">
         SEE WHAT OUR CUSTOMERS SAY!
       </h2>
-      <Carousel
-        className="w-full max-w-md"
-        setApi={(instance: any | null) => setApi(instance)}
-      >
+      <Carousel className="w-full max-w-md" setApi={setApi}>
         <CarouselContent>
           {reviews.map((review) => (
             <CarouselItem key={review.id}>

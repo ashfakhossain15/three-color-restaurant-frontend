@@ -46,7 +46,7 @@ const Main = () => {
             Order Now
           </button>
         </motion.div>
-        <section className="w-full">
+        <section className="w-full mt-10">
           <CustomerReviewCarousel />
         </section>
       </div>
