@@ -66,12 +66,15 @@ const CustomerReviewCarousel = () => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-black/30 p-6 rounded-lg shadow-lg w-full flex flex-col justify-center items-center"
+      className="bg-black/30 p-10 rounded-lg shadow-lg w-full flex flex-col justify-center items-center "
     >
-      <h2 className="text-4xl font-bold text-center mb-4 text-yellow-200">
+      <h2 className=" text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-4 text-yellow-200">
         SEE WHAT OUR CUSTOMERS SAY!
       </h2>
-      <Carousel className="w-full max-w-md" setApi={setApi}>
+      <Carousel
+        className="w-full max-w-[17.5rem] md:max-w-md lg:max-w-lg  sm:mx-28 md:mx-12 "
+        setApi={setApi}
+      >
         <CarouselContent>
           {reviews.map((review) => (
             <CarouselItem key={review.id}>
@@ -84,7 +87,9 @@ const CustomerReviewCarousel = () => {
                   transition={{ duration: 0.5 }}
                   className="text-center"
                 >
-                  <p className="text-white text-2xl">{review.text}</p>
+                  <p className="text-white text-xl md:text-2xl">
+                    {review.text}
+                  </p>
                   <p className="text-gray-500 mt-4">- {review.author}</p>
                 </motion.div>
               </AnimatePresence>
