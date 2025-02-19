@@ -8,7 +8,7 @@ import {
   CarouselPrevious,
   CarouselApi,
 } from "@/components/ui/carousel";
-import { motion, AnimatePresence } from "framer-motion"; // Import AnimatePresence
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const reviews = [
@@ -32,25 +32,32 @@ const reviews = [
 const CustomerReviewCarousel = () => {
   const [api, setApi] = useState<CarouselApi | null>(null);
   const [current, setCurrent] = useState(0);
+  const [isSliding, setIsSliding] = useState(false);
 
   useEffect(() => {
     if (!api) return;
 
     // Auto-swiping logic
     const interval = setInterval(() => {
-      api.scrollNext();
-    }, 3000); // Change slide every 3 seconds
+      setIsSliding(true);
+
+      if (current === reviews.length - 1) {
+        api.scrollTo(0);
+      } else {
+        api.scrollNext();
+      }
+    }, 6000);
 
     // Cleanup interval on unmount
     return () => clearInterval(interval);
-  }, [api]);
+  }, [api, current]);
 
   useEffect(() => {
     if (!api) return;
 
-    // Update current slide index
     api.on("select", () => {
       setCurrent(api.selectedScrollSnap());
+      setIsSliding(false);
     });
   }, [api]);
 
@@ -70,9 +77,9 @@ const CustomerReviewCarousel = () => {
             <CarouselItem key={review.id}>
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={current} // Use current to trigger re-render
+                  key={current}
                   initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+                  animate={{ opacity: isSliding ? 0 : 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
                   className="text-center"
@@ -94,7 +101,10 @@ const CustomerReviewCarousel = () => {
             className={`w-2 h-2 rounded-full ${
               current === index ? "bg-yellow-200" : "bg-gray-500"
             }`}
-            onClick={() => api?.scrollTo(index)}
+            onClick={() => {
+              setIsSliding(true);
+              api?.scrollTo(index);
+            }}
           />
         ))}
       </div>
