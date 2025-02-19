@@ -6,9 +6,9 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-  CarouselApi, // Import the correct type from the carousel component
+  CarouselApi,
 } from "@/components/ui/carousel";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion"; // Import AnimatePresence
 import { useEffect, useState } from "react";
 
 const reviews = [
@@ -68,15 +68,24 @@ const CustomerReviewCarousel = () => {
         <CarouselContent>
           {reviews.map((review) => (
             <CarouselItem key={review.id}>
-              <div className="text-center">
-                <p className="text-white text-2xl">{review.text}</p>
-                <p className="text-gray-500 mt-4">- {review.author}</p>
-              </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current} // Use current to trigger re-render
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-center"
+                >
+                  <p className="text-white text-2xl">{review.text}</p>
+                  <p className="text-gray-500 mt-4">- {review.author}</p>
+                </motion.div>
+              </AnimatePresence>
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="bg-slate-600 text-white" />
+        <CarouselNext className="bg-slate-600 text-white" />
       </Carousel>
       <div className="flex gap-2 mt-4">
         {reviews.map((_, index) => (
