@@ -103,13 +103,15 @@ const Header = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "-100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={`md:hidden  absolute ${
+            className={`md:hidden absolute ${
               isSticky
-                ? "top-[4rem] bg-black/60 backdrop-blur-md"
-                : "top-[5.5rem] bg-black/30 backdrop-blur-xs"
+                ? "top-[4rem] bg-black/50 backdrop-blur-md"
+                : "top-[5.5rem] bg-black/40 backdrop-blur-sm"
             } left-0 w-full shadow-lg z-50`}
           >
-            <nav className="flex flex-col justify-center items-center w-full space-y-2 p-4 text-base font-semibold">
+            <nav
+              className={`flex flex-col justify-center items-center w-full space-y-2 p-4 text-base font-semibold`}
+            >
               {navberLinks.map((item, index) => (
                 <Link
                   key={index}
