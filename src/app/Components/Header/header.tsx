@@ -43,7 +43,7 @@ const Header = () => {
     <div
       className={`w-full z-50 transition-all duration-400 ${
         isSticky
-          ? "fixed top-0 bg-black/60 backdrop-blur-md py-2 shadow-md"
+          ? "fixed top-0 bg-black/60 backdrop-blur-md py-2 "
           : "absolute bg-black/30 backdrop-blur-[3px] py-4 md:py-6"
       }`}
     >
@@ -105,7 +105,7 @@ const Header = () => {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className={`md:hidden  absolute ${
               isSticky
-                ? "top-[4rem] bg-black/60 "
+                ? "top-[4rem] bg-black/60 backdrop-blur-md"
                 : "top-[5.5rem] bg-black/30 backdrop-blur-xs"
             } left-0 w-full shadow-lg z-50`}
           >
