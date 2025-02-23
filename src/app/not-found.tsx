@@ -11,6 +11,14 @@ export default function NotFound() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
+        <motion.img
+          className="w-[250px] h-[250px] object-cover my-0 mx-auto"
+          src="/error.jpg"
+          alt="Logo"
+          initial={{ scale: 0.5 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        />
         <motion.h1
           className="text-6xl font-bold text-red-600"
           initial={{ scale: 0.8 }}
@@ -28,7 +36,7 @@ export default function NotFound() {
 
         <Link href="/">
           <motion.button
-            className="px-6 py-3 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition"
+            className="px-6 py-3 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition my-5"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
