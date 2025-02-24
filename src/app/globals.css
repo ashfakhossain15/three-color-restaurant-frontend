@@ -37,6 +37,35 @@ body {
     transform: translateX(0) rotate(0deg);
   }
 }
+.input-field {
+  transition: all 0.3s ease;
+}
+
+.input-field:focus {
+  background-color: #f3ebcb;
+  animation: wave 0.5s ease;
+}
+
+@keyframes wave {
+  0% {
+    scale: 1;
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    scale: 1.15;
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    scale: 1;
+    transform: translateX(0);
+  }
+}
 
 @layer base {
   :root {

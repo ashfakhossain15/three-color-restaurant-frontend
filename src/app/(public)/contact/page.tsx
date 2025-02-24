@@ -27,17 +27,17 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-4">
-      <div className="bg-black p-8 rounded-lg shadow-lg w-full max-w-md border border-white">
-        <h1 className="text-2xl font-bold mb-6 text-center text-yellow-400">
-          Contact Me!
+    <div className="min-h-screen bg-amber-200 flex items-center justify-center p-4">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md md:max-w-lg border-sky-200 border-4">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 text-center text-black">
+          Contact Us!
         </h1>
-        <form className="space-y-4" onSubmit={handleSubmit}>
+        <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Grid for the first 4 input fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Full Name */}
             <div>
-              <label className="block text-sm font-medium text-yellow-400">
+              <label className="block text-sm font-medium text-black">
                 Full Name
               </label>
               <input
@@ -46,13 +46,13 @@ export default function Contact() {
                 type="text"
                 value={formData.fullName}
                 onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 border border-white rounded-md shadow-sm focus:outline-none focus:ring-yellow-400 focus:border-yellow-400 bg-black text-white"
+                className="input-field mt-1 block w-full px-3 py-2 border border-cyan-200 rounded-md shadow-sm focus:outline-none focus:ring-teal-400 focus:border-teal-200 text-black"
               />
             </div>
 
             {/* Email Address */}
             <div>
-              <label className="block text-sm font-medium text-yellow-400">
+              <label className="block text-sm font-medium text-black">
                 Email Address
               </label>
               <input
@@ -61,13 +61,13 @@ export default function Contact() {
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 border border-white rounded-md shadow-sm focus:outline-none focus:ring-yellow-400 focus:border-yellow-400 bg-black text-white"
+                className="input-field mt-1 block w-full px-3 py-2 border border-amber-200 rounded-md shadow-sm focus:outline-none focus:ring-teal-400 focus:border-teal-200 text-black"
               />
             </div>
 
             {/* Mobile Number */}
             <div>
-              <label className="block text-sm font-medium text-yellow-400">
+              <label className="block text-sm font-medium text-black">
                 Mobile Number
               </label>
               <input
@@ -76,13 +76,13 @@ export default function Contact() {
                 type="tel"
                 value={formData.mobile}
                 onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 border border-white rounded-md shadow-sm focus:outline-none focus:ring-yellow-400 focus:border-yellow-400 bg-black text-white"
+                className="input-field mt-1 block w-full px-3 py-2 border border-amber-200 rounded-md shadow-sm focus:outline-none focus:ring-teal-400 focus:border-teal-200 text-black"
               />
             </div>
 
             {/* Email Subject */}
             <div>
-              <label className="block text-sm font-medium text-yellow-400">
+              <label className="block text-sm font-medium text-black">
                 Email Subject
               </label>
               <input
@@ -91,14 +91,14 @@ export default function Contact() {
                 type="text"
                 value={formData.subject}
                 onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 border border-white rounded-md shadow-sm focus:outline-none focus:ring-yellow-400 focus:border-yellow-400 bg-black text-white"
+                className="input-field mt-1 block w-full px-3 py-2 border border-amber-200 rounded-md shadow-sm focus:outline-none focus:ring-teal-400 focus:border-teal-200 text-black"
               />
             </div>
           </div>
 
           {/* Message Textarea */}
           <div>
-            <label className="block text-sm font-medium text-yellow-400">
+            <label className="block text-sm font-medium text-black">
               Your Message
             </label>
             <textarea
@@ -106,7 +106,7 @@ export default function Contact() {
               placeholder="Write Your Message"
               value={formData.message}
               onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 border border-white rounded-md shadow-sm focus:outline-none focus:ring-yellow-400 focus:border-yellow-400 bg-black text-white"
+              className="input-field mt-1 block w-full px-3 py-2 border border-amber-200 rounded-md shadow-sm focus:outline-none focus:ring-teal-400 focus:border-teal-200 text-black"
             ></textarea>
           </div>
 
@@ -114,7 +114,7 @@ export default function Contact() {
           <div>
             <button
               type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-400"
             >
               Send Message
             </button>
