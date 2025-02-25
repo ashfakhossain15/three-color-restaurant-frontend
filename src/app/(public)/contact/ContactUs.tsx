@@ -1,28 +1,28 @@
 import React, { useState } from "react";
 
 const ContactUs = () => {
-    const [formData, setFormData] = useState({
-        fullName: "",
-        email: "",
-        mobile: "",
-        subject: "",
-        message: "",
-      });
-    
-      const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      ) => {
-        const { name, value } = e.target;
-        setFormData({
-          ...formData,
-          [name]: value,
-        });
-      };
-    
-      const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        console.log("Form Data:", formData);
-      };
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    mobile: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Form Data:", formData);
+  };
   return (
     <div>
       <div className="min-h-screen bg-amber-200 flex items-center justify-center p-4">
@@ -44,7 +44,7 @@ const ContactUs = () => {
                   type="text"
                   value={formData.fullName}
                   onChange={handleChange}
-                  className="input-field mt-1 block w-full px-3 py-2 border border-cyan-200 rounded-md shadow-sm focus:outline-none focus:ring-teal-400 focus:border-teal-200 text-black"
+                  className="input-field mt-1 block w-full px-3 py-2 border border-amber-200 rounded-md shadow-sm focus:outline-none focus:ring-teal-400 focus:border-teal-200 text-black"
                 />
               </div>
 
