@@ -2,7 +2,12 @@ import Footer from "@/app/Components/Footer/Footer";
 import Header from "@/app/Components/Header/header";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
+const menuItems = [
+  { id: 1, name: "Classic Pizza" },
+  { id: 2, name: "Classic Pasta" },
+  { id: 3, name: "Macka Pane e Focaccia" },
+  { id: 4, name: "Pommes Fries" },
+];
 const Menu = () => (
   <div>
     <Header />
@@ -15,6 +20,18 @@ const Menu = () => (
             Order online
           </Button>
         </Link>
+        <section className="grid grid-cols-2 gap-6 py-7 px-5">
+          {menuItems.map((item) => (
+            <div
+              key={item.id}
+              className="border-2 border-yellow-500 p-3 text-center rounded-md hover:border-yellow-400 transition-all duration-500"
+            >
+              <button className="text-xl text-white font-bold">
+                {item.name}
+              </button>
+            </div>
+          ))}
+        </section>
       </div>
     </section>
     <Footer />
