@@ -22,11 +22,8 @@ const Menu = () => (
         </Link>
         <section className="grid grid-cols-2 gap-6 py-7 px-5">
           {menuItems.map((item) => (
-            <div
-              key={item.id}
-              className="border-2 border-yellow-500 p-3 text-center rounded-md hover:border-yellow-400 transition-all duration-500"
-            >
-              <button className="text-xl text-white font-bold">
+            <div key={item.id}>
+              <button className="border-2 border-yellow-500 p-3 text-center rounded-md hover:border-yellow-400 transition-all duration-500   text-sm text-wrap md:text-xl text-white font-bold w-full h-">
                 {item.name}
               </button>
             </div>
