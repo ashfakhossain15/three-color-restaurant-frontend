@@ -2,9 +2,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react"; // Import useRef
 import { FaAlignRight, FaTimes } from "react-icons/fa";
-import { usePathname } from "next/navigation"; // Import usePathname
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const navberLinks = [
@@ -16,15 +16,20 @@ const Header = () => {
   const [menuBar, setMenuBar] = useState(false);
   const [logoClass, setLogoClass] = useState("initial");
   const [isSticky, setIsSticky] = useState(false);
-  const pathname = usePathname(); // Get the current path
+  const hasAnimated = useRef(false); // Track if animation has played
+  const pathname = usePathname();
 
   const toggleMenuBar = () => setMenuBar(!menuBar);
 
   useEffect(() => {
-    setTimeout(() => {
-      setLogoClass("animates");
-    }, 600);
-  }, []);
+    // Only run the animation if it hasn't played yet
+    if (!hasAnimated.current) {
+      setTimeout(() => {
+        setLogoClass("animates");
+        hasAnimated.current = true; // Mark animation as played
+      }, 600);
+    }
+  }, []); // Empty dependency array ensures this runs only once on mount
 
   useEffect(() => {
     const handleScroll = () => {
@@ -76,7 +81,7 @@ const Header = () => {
                   : "text-yellow-100 hover:text-yellow-500" // Inactive link color
               }`}
             >
-              {item.title}
+              <a href="">{item.title}</a>
             </Link>
           ))}
         </nav>
