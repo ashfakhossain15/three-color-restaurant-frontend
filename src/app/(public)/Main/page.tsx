@@ -4,10 +4,11 @@ import { useInView, motion } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
 import CustomerReviewCarousel from "./customer-review/customer-review";
+import Section1 from './section1/section1';
 
 const Main = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.5, margin: "10px" });
+  const isInView = useInView(ref, { amount: 0.5, margin: "30px" });
   // useEffect(() => {
   //   setTimeout(() => {
   //     useInView("");
@@ -46,6 +47,9 @@ const Main = () => {
             Order Now
           </button>
         </motion.div>
+        <section className="w-full">
+          <Section1 />
+        </section>
         <section className="w-full mt-10">
           <CustomerReviewCarousel />
         </section>

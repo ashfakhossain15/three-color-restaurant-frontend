@@ -81,7 +81,7 @@ const Header = () => {
                   : "text-yellow-100 hover:text-yellow-500" // Inactive link color
               }`}
             >
-              <a href="">{item.title}</a>
+              {item.title}
             </Link>
           ))}
         </nav>
