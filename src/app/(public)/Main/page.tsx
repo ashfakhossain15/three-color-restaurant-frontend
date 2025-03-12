@@ -8,7 +8,7 @@ import Section1 from './section1/section1';
 
 const Main = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.5, margin: "30px" });
+  const isInView = useInView(ref, { amount: 0.2, margin: "30px" });
   // useEffect(() => {
   //   setTimeout(() => {
   //     useInView("");
