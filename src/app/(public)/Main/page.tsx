@@ -9,14 +9,10 @@ import Section1 from "./section1/section1";
 const Main = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.2, margin: "30px" });
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     useInView("");
-  //   }, 500);
-  // }, []);
+
   return (
-    <div ref={ref} className="py-10 pb-24">
-      <div className="relative flex flex-col items-center justify-center h-[100vh] text-white gap-4">
+    <div ref={ref} className="py-10 relative">
+      <div className=" flex flex-col items-center justify-center h-[100vh] text-white gap-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
