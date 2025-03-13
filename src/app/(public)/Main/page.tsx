@@ -4,7 +4,7 @@ import { useInView, motion } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
 import CustomerReviewCarousel from "./customer-review/customer-review";
-import Section1 from './section1/section1';
+import Section1 from "./section1/section1";
 
 const Main = () => {
   const ref = useRef(null);
@@ -15,8 +15,8 @@ const Main = () => {
   //   }, 500);
   // }, []);
   return (
-    <div ref={ref} className="py-32 md:pt-40 pb-24">
-      <div className="relative flex flex-col items-center justify-center h-full text-white gap-4">
+    <div ref={ref} className="py-10 pb-24">
+      <div className="relative flex flex-col items-center justify-center h-[100vh] text-white gap-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -47,13 +47,13 @@ const Main = () => {
             Order Now
           </button>
         </motion.div>
-        <section className="w-full">
-          <Section1 />
-        </section>
-        <section className="w-full mt-10">
-          <CustomerReviewCarousel />
-        </section>
       </div>
+      <section className="w-full">
+        <Section1 />
+      </section>
+      <section className="w-full mt-10">
+        <CustomerReviewCarousel />
+      </section>
     </div>
   );
 };
