@@ -9,7 +9,7 @@ type MenuItem = {
   id: number;
   name: string;
   price: string;
-  ingredients?: string[]; 
+  ingredients?: string[];
 };
 
 type MenuData = {
@@ -87,9 +87,9 @@ const Menu = () => {
                         <div>
                           <span>{item.name}</span>
                           {item.ingredients && (
-                            <ul className="text-sm text-gray-600">
+                            <ul className="text-sm text-gray-600 flex">
                               {item.ingredients.map((ingredient, idx) => (
-                                <li key={idx}>{ingredient}</li>
+                                <li key={idx}>.{ingredient}</li>
                               ))}
                             </ul>
                           )}
