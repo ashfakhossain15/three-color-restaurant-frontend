@@ -9,6 +9,7 @@ type MenuItem = {
   id: number;
   name: string;
   price: string;
+  ingredients?: string[]; 
 };
 
 type MenuData = {
@@ -27,8 +28,8 @@ const Menu = () => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        const data: MenuData = await response.json();
-        setMenuItems(data);
+        const data = await response.json();
+        setMenuItems(data.menu); // Extract the nested `menu` object
       } catch (error) {
         console.error("Error fetching menu items:", error);
         setError("Failed to load menu items.");
@@ -66,7 +67,7 @@ const Menu = () => {
             )}
           </section>
 
-          {/* Upload Data Section - Displaying Fetched Menu Items */}
+          {/* Dynamic menu items */}
           <section className="w-full max-w-4xl bg-white p-5 rounded-lg shadow-lg mt-6">
             <h2 className="text-xl font-bold text-center mb-4">Menu Items</h2>
 
@@ -83,7 +84,16 @@ const Menu = () => {
                   <ul>
                     {items.map((item) => (
                       <li key={item.id} className="flex justify-between py-2">
-                        <span>{item.name}</span>
+                        <div>
+                          <span>{item.name}</span>
+                          {item.ingredients && (
+                            <ul className="text-sm text-gray-600">
+                              {item.ingredients.map((ingredient, idx) => (
+                                <li key={idx}>{ingredient}</li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
                         <span className="text-yellow-600">{item.price}</span>
                       </li>
                     ))}
