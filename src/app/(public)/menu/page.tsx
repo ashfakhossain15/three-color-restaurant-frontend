@@ -81,20 +81,29 @@ const Menu = () => {
                   <h3 className="text-lg font-semibold border-b-2 border-yellow-500 mb-2">
                     {category.toUpperCase()}
                   </h3>
-                  <ul>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {items.map((item) => (
-                      <li key={item.id} className="flex justify-between py-2">
-                        <div>
-                          <span>{item.name}</span>
-                          {item.ingredients && (
-                            <ul className="text-sm text-gray-600 flex">
-                              {item.ingredients.map((ingredient, idx) => (
-                                <li key={idx}>.{ingredient}</li>
-                              ))}
-                            </ul>
-                          )}
+                      <li
+                        key={item.id}
+                        className="bg-gray-50 p-4 rounded-lg shadow-sm"
+                      >
+                        <div className="flex flex-col justify-between h-full">
+                          <div>
+                            <span className="text-lg font-semibold">
+                              {item.name}
+                            </span>
+                            {item.ingredients && (
+                              <ul className="mt-2 text-sm text-gray-600">
+                                {item.ingredients.map((ingredient, idx) => (
+                                  <li key={idx}>• {ingredient}</li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                          <span className="text-yellow-600 font-bold mt-2">
+                            {item.price}
+                          </span>
                         </div>
-                        <span className="text-yellow-600">{item.price}</span>
                       </li>
                     ))}
                   </ul>
