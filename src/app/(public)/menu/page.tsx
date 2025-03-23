@@ -26,6 +26,9 @@ const Menu = () => {
   const [menuItems, setMenuItems] = useState<MenuData>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState<keyof SectionRefs | null>(
+    null
+  );
 
   const sectionRefs: SectionRefs = {
     pizza: useRef<HTMLDivElement>(null),
@@ -39,6 +42,7 @@ const Menu = () => {
     const ref = sectionRefs[category];
     if (ref && ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth" });
+      setActiveSection(category);
     }
   };
 
@@ -72,6 +76,12 @@ const Menu = () => {
     visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
   };
 
+  const dishVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+    hover: { scale: 1.05, transition: { duration: 0.3 } },
+  };
+
   const renderMenuItems = (
     category: string,
     items: MenuItem[],
@@ -94,7 +104,15 @@ const Menu = () => {
         </h3>
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {items.map((item) => (
-            <li key={item.id} className="bg-gray-50 p-4 rounded-lg shadow-sm">
+            <motion.li
+              key={item.id}
+              variants={dishVariants}
+              initial="hidden"
+              whileInView="visible"
+              whileHover="hover"
+              viewport={{ once: true, amount: 0.2 }}
+              className="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
+            >
               <div className="flex flex-col justify-between h-full">
                 <div>
                   <span className="text-lg font-semibold">{item.name}</span>
@@ -110,7 +128,7 @@ const Menu = () => {
                   {item.price}
                 </span>
               </div>
-            </li>
+            </motion.li>
           ))}
         </ul>
       </motion.div>
@@ -146,7 +164,7 @@ const Menu = () => {
               </div>
             ))}
           </motion.section>
-          <section className="w-full max-w-4xl bg-white p-5 rounded-lg shadow-lg mt-6">
+          <section className="w-full max-w-4xl bg-white bg-opacity-90 p-5 rounded-lg shadow-lg mt-6">
             <h2 className="text-xl font-bold text-center mb-4">Menu Items</h2>
             {loading ? (
               <p className="text-center text-gray-500">Loading menu...</p>
@@ -154,7 +172,9 @@ const Menu = () => {
               <p className="text-center text-red-500">{error}</p>
             ) : Object.keys(menuItems).length > 0 ? (
               Object.entries(menuItems).map(([category, items], index) =>
-                renderMenuItems(category, items, index)
+                activeSection === category || activeSection === null
+                  ? renderMenuItems(category, items, index)
+                  : null
               )
             ) : (
               <p className="text-center text-gray-500">
