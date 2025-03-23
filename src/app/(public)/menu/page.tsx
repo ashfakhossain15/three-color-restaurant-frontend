@@ -3,9 +3,10 @@ import Footer from "@/app/Components/Footer/Footer";
 import Header from "@/app/Components/Header/header";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion"; // Import Framer Motion
+import { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
 
+// Define types
 type MenuItem = {
   id: number;
   name: string;
@@ -17,10 +18,30 @@ type MenuData = {
   [category: string]: MenuItem[];
 };
 
+type SectionRefs = {
+  pizza: React.RefObject<HTMLDivElement> | null;
+  pasta: React.RefObject<HTMLDivElement> | null;
+  calzone: React.RefObject<HTMLDivElement> | null;
+  sandwiches: React.RefObject<HTMLDivElement> | null;
+  fries: React.RefObject<HTMLDivElement> | null;
+};
+
 const Menu = () => {
   const [menuItems, setMenuItems] = useState<MenuData>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const sectionRefs: SectionRefs = {
+    pizza: useRef<HTMLDivElement>(null),
+    pasta: useRef<HTMLDivElement>(null),
+    calzone: useRef<HTMLDivElement>(null),
+    sandwiches: useRef<HTMLDivElement>(null),
+    fries: useRef<HTMLDivElement>(null),
+  };
+
+  const scrollToSection = (category: keyof SectionRefs) => {
+    sectionRefs[category]?.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
     const fetchMenuItems = async () => {
@@ -30,7 +51,7 @@ const Menu = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setMenuItems(data.menu); // Extract the nested `menu` object
+        setMenuItems(data.menu || data); // Ensure correct data extraction
       } catch (error) {
         console.error("Error fetching menu items:", error);
         setError("Failed to load menu items. Please try again later.");
@@ -42,14 +63,13 @@ const Menu = () => {
     fetchMenuItems();
   }, []);
 
-  // Animation variants for Framer Motion
+  // Animation variants
   const sectionVariants = {
-    hidden: { opacity: 0, x: -100 }, // Start offscreen to the left
+    hidden: { opacity: 0, x: -100 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
   };
-
   const sectionVariantsRight = {
-    hidden: { opacity: 0, x: 100 }, // Start offscreen to the right
+    hidden: { opacity: 0, x: 100 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
   };
 
@@ -58,17 +78,17 @@ const Menu = () => {
     items: MenuItem[],
     index: number
   ) => {
-    const isEven = index % 2 === 0; // Alternate between left and right
+    const isEven = index % 2 === 0;
     const variants = isEven ? sectionVariants : sectionVariantsRight;
-
     return (
       <motion.div
         key={category}
         variants={variants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }} // Animate only once and when 20% of the section is in view
-        className={`mb-6 ${isEven ? "text-left" : "text-right"}`} // Alternate text alignment
+        viewport={{ once: true, amount: 0.2 }}
+        className={`mb-6 ${isEven ? "text-left" : "text-right"}`}
+        ref={sectionRefs[category as keyof SectionRefs]}
       >
         <h3 className="text-lg font-semibold border-b-2 border-yellow-500 mb-2">
           {category.toUpperCase()}
@@ -103,15 +123,12 @@ const Menu = () => {
       <Header />
       <section className="relative h-full bg-cover bg-center bg-no-repeat bg-fixed bg-[url('/menu-img.jpg')] w-full">
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-
         <div className="relative w-full mx-auto py-32 px-11 md:pt-40 flex flex-col justify-center items-center">
-          <Link href="https://open-vsx.org/extension/Equinusocio/vsc-material-theme">
+          <Link href="#">
             <Button className="bg-yellow-300 px-5 py-3 transition-all duration-500 hover:text-white text-black rounded-full">
               Order online
             </Button>
           </Link>
-
-          {/* Static menu categories */}
           <motion.section
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -119,21 +136,19 @@ const Menu = () => {
             viewport={{ once: true, amount: 0.2 }}
             className="grid grid-cols-2 gap-6 py-7 px-5"
           >
-            {["pizza", "pasta", "calzone", "sandwiches", "fries"].map(
-              (category, index) => (
-                <div key={index}>
-                  <button className="border-2 border-yellow-500 p-3 text-center rounded-md hover:border-yellow-400 transition-all duration-500 text-sm md:text-xl text-white font-bold w-full">
-                    {category.toUpperCase()}
-                  </button>
-                </div>
-              )
-            )}
+            {Object.keys(sectionRefs).map((category, index) => (
+              <div key={index}>
+                <button
+                  onClick={() => scrollToSection(category as keyof SectionRefs)}
+                  className="border-2 border-yellow-500 p-3 text-center rounded-md hover:border-yellow-400 transition-all duration-500 text-sm md:text-xl text-white font-bold w-full"
+                >
+                  {category.toUpperCase()}
+                </button>
+              </div>
+            ))}
           </motion.section>
-
-          {/* Dynamic menu items */}
           <section className="w-full max-w-4xl bg-white p-5 rounded-lg shadow-lg mt-6">
             <h2 className="text-xl font-bold text-center mb-4">Menu Items</h2>
-
             {loading ? (
               <p className="text-center text-gray-500">Loading menu...</p>
             ) : error ? (
