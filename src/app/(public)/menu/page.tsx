@@ -4,6 +4,7 @@ import Header from "@/app/Components/Header/header";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion"; 
 
 type MenuItem = {
   id: number;
@@ -29,10 +30,10 @@ const Menu = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setMenuItems(data.menu); // Extract the nested `menu` object
+        setMenuItems(data.menu); 
       } catch (error) {
         console.error("Error fetching menu items:", error);
-        setError("Failed to load menu items.");
+        setError("Failed to load menu items. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -40,6 +41,48 @@ const Menu = () => {
 
     fetchMenuItems();
   }, []);
+
+  
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
+  const renderMenuItems = (category: string, items: MenuItem[]) => (
+    <motion.div
+      key={category}
+      variants={sectionVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }} 
+      className="mb-6"
+    >
+      <h3 className="text-lg font-semibold border-b-2 border-yellow-500 mb-2">
+        {category.toUpperCase()}
+      </h3>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {items.map((item) => (
+          <li key={item.id} className="bg-gray-50 p-4 rounded-lg shadow-sm">
+            <div className="flex flex-col justify-between h-full">
+              <div>
+                <span className="text-lg font-semibold">{item.name}</span>
+                {item.ingredients && (
+                  <ul className="mt-2 text-sm text-gray-600">
+                    {item.ingredients.map((ingredient, idx) => (
+                      <li key={idx}>• {ingredient}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              <span className="text-yellow-600 font-bold mt-2">
+                {item.price}
+              </span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </motion.div>
+  );
 
   return (
     <div>
@@ -55,7 +98,13 @@ const Menu = () => {
           </Link>
 
           {/* Static menu categories */}
-          <section className="grid grid-cols-2 gap-6 py-7 px-5">
+          <motion.section
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid grid-cols-2 gap-6 py-7 px-5"
+          >
             {["pizza", "pasta", "calzone", "sandwiches", "fries"].map(
               (category, index) => (
                 <div key={index}>
@@ -65,7 +114,7 @@ const Menu = () => {
                 </div>
               )
             )}
-          </section>
+          </motion.section>
 
           {/* Dynamic menu items */}
           <section className="w-full max-w-4xl bg-white p-5 rounded-lg shadow-lg mt-6">
@@ -76,39 +125,9 @@ const Menu = () => {
             ) : error ? (
               <p className="text-center text-red-500">{error}</p>
             ) : Object.keys(menuItems).length > 0 ? (
-              Object.entries(menuItems).map(([category, items]) => (
-                <div key={category} className="mb-6">
-                  <h3 className="text-lg font-semibold border-b-2 border-yellow-500 mb-2">
-                    {category.toUpperCase()}
-                  </h3>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {items.map((item) => (
-                      <li
-                        key={item.id}
-                        className="bg-gray-50 p-4 rounded-lg shadow-sm"
-                      >
-                        <div className="flex flex-col justify-between h-full">
-                          <div>
-                            <span className="text-lg font-semibold">
-                              {item.name}
-                            </span>
-                            {item.ingredients && (
-                              <ul className="mt-2 text-sm text-gray-600">
-                                {item.ingredients.map((ingredient, idx) => (
-                                  <li key={idx}>• {ingredient}</li>
-                                ))}
-                              </ul>
-                            )}
-                          </div>
-                          <span className="text-yellow-600 font-bold mt-2">
-                            {item.price}
-                          </span>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))
+              Object.entries(menuItems).map(([category, items]) =>
+                renderMenuItems(category, items)
+              )
             ) : (
               <p className="text-center text-gray-500">
                 No menu items available.
