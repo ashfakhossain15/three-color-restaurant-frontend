@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 
-// Define types
+
 type MenuItem = {
   id: number;
   name: string;
@@ -54,7 +54,7 @@ const Menu = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setMenuItems(data.menu || data); // Ensure correct data extraction
+        setMenuItems(data.menu || data); 
       } catch (error) {
         console.error("Error fetching menu items:", error);
         setError("Failed to load menu items. Please try again later.");
@@ -66,7 +66,6 @@ const Menu = () => {
     fetchMenuItems();
   }, []);
 
-  // Animation variants
   const sectionVariants = {
     hidden: { opacity: 0, x: -100 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
