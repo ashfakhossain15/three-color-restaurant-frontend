@@ -19,11 +19,7 @@ type MenuData = {
 };
 
 type SectionRefs = {
-  pizza: React.RefObject<HTMLDivElement> | null;
-  pasta: React.RefObject<HTMLDivElement> | null;
-  calzone: React.RefObject<HTMLDivElement> | null;
-  sandwiches: React.RefObject<HTMLDivElement> | null;
-  fries: React.RefObject<HTMLDivElement> | null;
+  [key: string]: React.MutableRefObject<HTMLDivElement | null>;
 };
 
 const Menu = () => {
@@ -40,7 +36,10 @@ const Menu = () => {
   };
 
   const scrollToSection = (category: keyof SectionRefs) => {
-    sectionRefs[category]?.current?.scrollIntoView({ behavior: "smooth" });
+    const ref = sectionRefs[category];
+    if (ref && ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   useEffect(() => {
@@ -88,7 +87,7 @@ const Menu = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         className={`mb-6 ${isEven ? "text-left" : "text-right"}`}
-        ref={sectionRefs[category as keyof SectionRefs]}
+        ref={sectionRefs[category]}
       >
         <h3 className="text-lg font-semibold border-b-2 border-yellow-500 mb-2">
           {category.toUpperCase()}
@@ -139,7 +138,7 @@ const Menu = () => {
             {Object.keys(sectionRefs).map((category, index) => (
               <div key={index}>
                 <button
-                  onClick={() => scrollToSection(category as keyof SectionRefs)}
+                  onClick={() => scrollToSection(category)}
                   className="border-2 border-yellow-500 p-3 text-center rounded-md hover:border-yellow-400 transition-all duration-500 text-sm md:text-xl text-white font-bold w-full"
                 >
                   {category.toUpperCase()}
