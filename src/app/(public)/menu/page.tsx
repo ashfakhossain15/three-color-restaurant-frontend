@@ -94,10 +94,10 @@ const Menu = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className={`mb-6 ${isEven ? "text-left" : "text-right"}`}
+        className={`mb-6  ${isEven ? "text-left" : "text-right"}`}
         ref={sectionRefs[category]}
       >
-        <h3 className="text-lg font-semibold border-b-2 border-yellow-500 mb-2">
+        <h3 className="text-lg md:text-xl lg:text-2xl font-semibold border-b-2 border-yellow-500 mb-2">
           {category.toUpperCase()}
         </h3>
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -113,7 +113,9 @@ const Menu = () => {
             >
               <div className="flex flex-col justify-between h-full">
                 <div>
-                  <span className="text-lg font-semibold">{item.name}</span>
+                  <span className="text-lg md:text-xl lg:text-2xl my-3 font-semibold">
+                    {item.name}
+                  </span>
                   {item.ingredients && (
                     <ul className="mt-2 text-sm text-white">
                       {item.ingredients.map((ingredient, idx) => (
@@ -149,20 +151,26 @@ const Menu = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true, amount: 0.2 }}
-            className="grid grid-cols-2 gap-6 py-7 px-5"
+            className="flex flex-wrap justify-center gap-6 py-7 px-5"
           >
             {Object.keys(sectionRefs).map((category, index) => (
-              <div key={index}>
+              <div
+                key={index}
+                className={` md:w-[30%]   ${
+                  index < 3 ? "first-row" : "second-row"
+                } flex justify-center`}
+              >
                 <button
                   onClick={() => scrollToSection(category)}
-                  className="border-2 border-yellow-500 p-3 text-center rounded-md hover:border-yellow-400 transition-all duration-500 text-sm md:text-xl text-white font-bold w-full"
+                  className="border-2 border-yellow-500 p-3 text-center rounded-md hover:border-yellow-400 transition-all duration-500 text-white text-base md:text-lg lg:text-xl font-bold w-full"
                 >
                   {category.toUpperCase()}
                 </button>
               </div>
             ))}
           </motion.section>
-          <section className="w-full max-w-4xl bg-white bg-opacity-90 p-5 rounded-lg shadow-lg mt-6">
+
+          <section className="w-full max-w-4xl bg-black/30 px-8 md:px-12 py-5 rounded-lg shadow-lg mt-6">
             <h2 className="text-xl font-bold text-center mb-4">Menu Items</h2>
             {loading ? (
               <p className="text-center text-gray-500">Loading menu...</p>
