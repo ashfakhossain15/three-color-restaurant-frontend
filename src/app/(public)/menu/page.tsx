@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 
-
 type MenuItem = {
   id: number;
   name: string;
@@ -54,7 +53,7 @@ const Menu = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setMenuItems(data.menu || data); 
+        setMenuItems(data.menu || data);
       } catch (error) {
         console.error("Error fetching menu items:", error);
         setError("Failed to load menu items. Please try again later.");
@@ -110,13 +109,13 @@ const Menu = () => {
               whileInView="visible"
               whileHover="hover"
               viewport={{ once: true, amount: 0.2 }}
-              className="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
+              className="bg-gradient-to-r from-zinc-700 to-slate-800 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 text-white"
             >
               <div className="flex flex-col justify-between h-full">
                 <div>
                   <span className="text-lg font-semibold">{item.name}</span>
                   {item.ingredients && (
-                    <ul className="mt-2 text-sm text-gray-600">
+                    <ul className="mt-2 text-sm text-white">
                       {item.ingredients.map((ingredient, idx) => (
                         <li key={idx}>• {ingredient}</li>
                       ))}
