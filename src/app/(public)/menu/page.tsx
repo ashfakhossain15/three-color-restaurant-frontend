@@ -97,7 +97,7 @@ const Menu = () => {
         className={`mb-6  ${isEven ? "text-left" : "text-right"}`}
         ref={sectionRefs[category]}
       >
-        <h3 className="text-lg md:text-xl lg:text-2xl font-semibold border-b-2 border-yellow-500 mb-2">
+        <h3 className="text-white text-lg md:text-xl lg:text-2xl font-semibold border-b-2 border-yellow-500 mb-2">
           {category.toUpperCase()}
         </h3>
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -171,7 +171,9 @@ const Menu = () => {
           </motion.section>
 
           <section className="w-full max-w-4xl bg-black/30 px-8 md:px-12 py-5 rounded-lg shadow-lg mt-6">
-            <h2 className="text-xl font-bold text-center mb-4">Menu Items</h2>
+            <h2 className="text-white text-xl font-bold text-center mb-4">
+              Menu Items
+            </h2>
             {loading ? (
               <p className="text-center text-gray-500">Loading menu...</p>
             ) : error ? (
